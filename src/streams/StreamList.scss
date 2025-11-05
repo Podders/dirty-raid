@@ -179,6 +179,24 @@ a {
   }
 }
 
+// Responsive layout tweaks for the Custom Event modal manage list
+.custom-event-url {
+  .event-title {
+    min-width: 0; // allow ellipsis if needed
+  }
+
+  .event-actions {
+    width: 100%;
+  }
+
+  @media (min-width: 576px) {
+    .event-actions {
+      width: auto;
+      margin-left: .75rem;
+    }
+  }
+}
+
 .partner {
   margin-right: 0.25em;
   color: #bf94ff;
