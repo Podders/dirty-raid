@@ -182,7 +182,7 @@ function StreamList() {
                                     <Nav.Link eventKey="raidpal">RaidPal</Nav.Link>
                                 </Nav.Item>
                                 {customEvents.length > 0 && (
-                                    <Nav.Item className="d-flex align-items-center">
+                                    <Nav.Item>
                                         <Nav.Link eventKey="custom">Custom</Nav.Link>
                                     </Nav.Item>
                                 )}
