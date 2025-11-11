@@ -1,7 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from "react";
 import {fetchFollowedStreams} from "./StreamActions";
-import {Container, Nav, Navbar, NavDropdown, Tab} from "react-bootstrap";
+import {Container, Nav, Navbar, NavDropdown, Tab, Form} from "react-bootstrap";
+import {setPreference} from "../app/AppActions";
 import './StreamList.scss';
 import twitchLogo from '../TwitchGlitchPurple.svg';
 import {revokeToken} from "../session/SessionActions";
@@ -29,6 +30,7 @@ function StreamList() {
     const userCache = useSelector(state => state.users.cache);
     const { isFetching: isTeamsFetching, data: teamsData } = useSelector(state => state.teams);
     const { customEvent } = useSelector(state => state.raidpal);
+    const themeMode = useSelector(state => state.app.preferences.themeMode);
     const [ currentTab, setCurrentTab ] = useState('followed');
     const [ showCustomEventModal, setShowCustomEventModal ] = useState(false);
     const [ showQRCodeModal, setShowQRCodeModal ] = useState(false);
@@ -58,6 +60,11 @@ function StreamList() {
     const handleCloseQRModal = useCallback(() => {
         setShowQRCodeModal(false);
     }, []);
+
+    const handleToggleTheme = useCallback((e) => {
+        const checked = e.target.checked;
+        dispatch(setPreference('themeMode', checked ? 'light' : 'dark'));
+    }, [dispatch]);
 
     useEffect(() => {
         // Fetch on load
@@ -140,7 +147,7 @@ function StreamList() {
         <Dropzone onFile={handleFileDrop}>
             <div className="Streams">
                 <Tab.Container id="stream-tabs" activeKey={currentTab} onSelect={handleTabChange}>
-                    <div className="navbar navbar-expand navbar-dark bg-dark sticky-top">
+                    <div className="navbar navbar-expand sticky-top bg-body-tertiary">
                         <Container>
                             <Nav className="me-auto" navbar={true} bsPrefix="navbar-nav">
                                 <Nav.Item>
@@ -165,6 +172,16 @@ function StreamList() {
                                 <NavDropdown title={<><img src={userCache[user_id]?.profile_image_url || twitchLogo} alt="" /> {userCache[user_id]?.display_name || login}</>} id="user-dropdown" align="end">
                                     <NavDropdown.Item onClick={handleShowQRModal}>My Channel</NavDropdown.Item>
                                     <NavDropdown.Item onClick={handleShowModal}>Custom Event</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <div className="px-3 py-1">
+                                        <Form.Check
+                                            type="switch"
+                                            id="toggle-light-mode"
+                                            label="Light mode"
+                                            checked={themeMode === 'light'}
+                                            onChange={handleToggleTheme}
+                                        />
+                                    </div>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={handleSignOut}>Sign out</NavDropdown.Item>
                                 </NavDropdown>

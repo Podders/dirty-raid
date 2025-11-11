@@ -18,6 +18,7 @@ function App() {
 
     const dispatch = useDispatch();
     const session = useSelector(state => state.session);
+    const themeMode = useSelector(state => state.app.preferences.themeMode);
 
     const { lastError, token, data } = session;
 
@@ -51,6 +52,12 @@ function App() {
         }
 
     }, [dispatch, token, data])
+
+    // Apply theme mode to Bootstrap
+    useEffect(() => {
+        const theme = themeMode || 'dark';
+        document.documentElement.setAttribute('data-bs-theme', theme);
+    }, [themeMode]);
 
     // If the token is saved and valdiated, show the stream list
     if (!lastError && token && token.access_token && data && data.user_id) {

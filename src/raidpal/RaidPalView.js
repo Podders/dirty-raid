@@ -239,7 +239,7 @@ export default function RaidPalView() {
                     {!raidpalData?.length ? (
                         <Nav.Item className="static"><Alert variant="warning" className="mt-3">You don't have any upcoming events :(</Alert></Nav.Item>
                     ) : (
-                        <NavDropdown placement="bottom" menuVariant="dark" title={<span>{selectedEvent?.title || (selectedEventKey && raidpalData.find(e => e.api_link === selectedEventKey))?.title || 'Select RaidPal event...'}</span>}>
+                        <NavDropdown placement="bottom" title={<span>{selectedEvent?.title || (selectedEventKey && raidpalData.find(e => e.api_link === selectedEventKey))?.title || 'Select RaidPal event...'}</span>}>
                             {raidpalData.map((event, i) => {
                                 const isLive = now.isBetween(Moment.utc(event.starttime), Moment.utc(event.endtime));
                                 return (

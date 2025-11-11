@@ -112,7 +112,7 @@ export default function TeamsView() {
                     {!teamsData?.length ? (
                         <Nav.Item className="static"><Alert variant="warning" className="mt-3">You do not appear to be a member of any teams :(</Alert></Nav.Item>
                     ) : (
-                        <NavDropdown placement="bottom" menuVariant="dark" title={<span>{selectedTeam?.team_display_name || 'Select twitch team...'}</span>}>
+                        <NavDropdown placement="bottom" title={<span>{selectedTeam?.team_display_name || 'Select twitch team...'}</span>}>
                             {teamsData.map((team, i) => {
                                 return (
                                     <NavDropdown.Item key={i} eventKey={team.id}>

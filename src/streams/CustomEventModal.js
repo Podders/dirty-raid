@@ -39,7 +39,7 @@ export default function CustomEventModal({ showModal, handleCloseModal, onCustom
     }, [fetching, onCustomEventLoaded, customURLRef]);
 
     return (
-        <Modal data-bs-theme="dark" show={showModal} onHide={handleCloseModal} size="lg" centered className="custom-event-url">
+        <Modal show={showModal} onHide={handleCloseModal} size="lg" centered className="custom-event-url">
             <Form onSubmit={handleSubmit}>
                 <Modal.Header closeButton>
                     <Modal.Title>

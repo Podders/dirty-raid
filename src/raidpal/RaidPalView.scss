@@ -8,13 +8,32 @@
     padding-right: 0.5em;
   }
 
+  // Dropdown toggle
   .dropdown > a {
-    background-color: #402765;
     display: flex;
     align-items: center;
     font-weight: 500;
     padding-left: 0.5em;
     padding-right: 0.5em;
+    color: var(--bs-body-color);
+
+    // Light mode: light grey base, slightly darker on hover
+    [data-bs-theme='light'] & {
+      background-color: rgba(0,0,0,.04);
+    }
+    [data-bs-theme='light'] &:hover,
+    [data-bs-theme='light'] &:focus {
+      background-color: rgba(0,0,0,.06);
+    }
+
+    // Dark mode: dark grey base, slightly lighter on hover
+    [data-bs-theme='dark'] & {
+      background-color: rgba(255,255,255,.08);
+    }
+    [data-bs-theme='dark'] &:hover,
+    [data-bs-theme='dark'] &:focus {
+      background-color: rgba(255,255,255,.12);
+    }
 
     span {
       text-overflow: ellipsis;
@@ -26,28 +45,15 @@
 
   .dropdown-menu {
     width: 100%;
-
-    a {
-      display: flex;
-    }
   }
 
-  a {
-    //display: flex;
-    width: 100%;
-    color: white;
-    border-radius: 0.5em;
-
-    &:focus,
-    &.active {
-      color: white;
-      background-color: #402765;
-    }
-
-    &:hover {
-      color: white;
-      background-color: lighten(#402765, 15%);
-    }
+  // Dropdown items (theme-neutral greys, clear hover/selected)
+  .dropdown-menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    color: var(--bs-body-color);
+    border-radius: 0;
+    background-color: transparent;
 
     .title {
       text-overflow: ellipsis;
@@ -62,6 +68,16 @@
       margin-right: 0;
     }
   }
+
+  // Light mode greys
+  [data-bs-theme='light'] & .dropdown-menu .dropdown-item:hover { background-color: rgba(0,0,0,.05); }
+  [data-bs-theme='light'] & .dropdown-menu .dropdown-item:focus,
+  [data-bs-theme='light'] & .dropdown-menu .dropdown-item.active { background-color: rgba(0,0,0,.08); }
+
+  // Dark mode greys
+  [data-bs-theme='dark'] & .dropdown-menu .dropdown-item:hover { background-color: rgba(255,255,255,.08); }
+  [data-bs-theme='dark'] & .dropdown-menu .dropdown-item:focus,
+  [data-bs-theme='dark'] & .dropdown-menu .dropdown-item.active { background-color: rgba(255,255,255,.12); }
 }
 
 .event {
@@ -88,29 +104,29 @@
   .description {
     padding: 0 0.25em;
     font-size: .9rem;
-    color: #e8e8e8;
+    color: var(--bs-secondary-color);
   }
 
   .lineup {
-    border-top: solid 1px #4b4d55;
+    border-top: solid 1px var(--bs-border-color);
     margin-top: 1em;
   }
 
   .slot {
     display: flex;
     align-items: center;
-    border-bottom: solid 1px #4b4d55;
+    border-bottom: solid 1px var(--bs-border-color);
     padding: 0.5em 0;
     cursor: pointer;
     width: 100%;
     padding-left: 0.5em;
 
     &:hover {
-      background-color: darken(#282c34, 15%);
+      background-color: var(--bs-secondary-bg);
     }
 
     &.current {
-      background-color: #402765;
+      background-color: var(--bs-primary-bg-subtle);
     }
 
     .profile-container {
@@ -141,7 +157,7 @@
 
       .timing {
         font-size: .9rem;
-        color: #e8e8e8;
+        color: var(--bs-secondary-color);
       }
     }
 
@@ -159,8 +175,16 @@
         font-size: .8rem;
 
         i {
-          color: white;
+          color: #fff !important;
         }
+      }
+
+      // Ensure all pills (badges) have white content in both themes
+      .badge {
+        color: #fff !important;
+      }
+      .badge i {
+        color: #fff !important;
       }
     }
 
